@@ -1,14 +1,16 @@
 const { connect } = require('getstream')
 const bcrypt = require('bcrypt')
-const StreamChat = require('stream-chat')
+const StreamChat = require('stream-chat').StreamChat;
 const crypto = require('crypto')
+
+require('dotenv').config()
 
 const api_key = process.env.STREAM_API_KEY;
 const api_secret = process.env.STREAM_API_SECRET;
 const app_id = process.env.STREAM_APP_ID;
 
 
-const login = async (req, res) => {
+const signup = async (req, res) => {
     try {
         const { fullName, username, password, phoneNumber } = req.body;
 
@@ -33,7 +35,7 @@ const login = async (req, res) => {
      }
 }
 
-const signup = async (req, res) => {
+const login = async (req, res) => {
     try {
         const { username, password } = req.body;
 
@@ -44,7 +46,7 @@ const signup = async (req, res) => {
         const client = StreamChat.getInstance(api_key, api_secret);
 
         //get the desctructure user who match the username
-        const { user } = await client.queryUsers({ name: username });
+        const { users } = await client.queryUsers({ name: username });
 
         //verifing if we have the user
         if (!users.length)
