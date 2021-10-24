@@ -1,11 +1,13 @@
 const express = require('express');
 const cors = require('cors')
 
+//requiring the routes
 const authRoutes = require('./routes/auth.js')
 
 const app = express();
 const PORT = process.env.PORT || 4000;
 
+//requiring environment variables
 require('dotenv').config()
 
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
@@ -23,6 +25,8 @@ app.get('/', (req, res) => {
     res.send('Hello World!')
 });
 
+
+//twilio code
 app.post('/', (req, res) => {
     const { message, user: sender, type, members } = req.body;
     if (type === 'message.new') {
