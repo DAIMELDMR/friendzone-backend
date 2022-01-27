@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors')
+const bodyParser = require('body-parser');
 
 //requiring the routes
 const authRoutes = require('./routes/auth.js')
@@ -17,8 +18,8 @@ require('dotenv').config()
 
 //middleware
 app.use(cors())
-app.use(express.json())
-app.use(express.urlencoded())
+app.use(bodyParser.json({ limit: '30mb', extended: false }))
+app.use(bodyParser.urlencoded({ limit: '30mb', extended: false }))
 
 //routes
 app.get('/', (req, res) => {
