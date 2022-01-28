@@ -19,7 +19,7 @@ const signup = async (req, res) => {
         const userId = crypto.randomBytes(16).toString('hex');
 
         //Establishing connection to the client
-        const serverClient = connect(api_key, api_secret, app_id);
+        const serverClient = stream.connect(api_key, api_secret, app_id);
 
         //hashing the password using 10 rounds
         const hashedPassword = await bcrypt.hash(password, 10);
