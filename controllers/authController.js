@@ -31,7 +31,7 @@ const signup = async (req, res) => {
         res.status(200).json({token, fullName, username, userId, phoneNumber, hashedPassword})
 
     } catch (error) {
-        console.error(error.response.dat)
+        console.log(error)
         res.status(500).json({ message: error });
      }
 }
